@@ -35,7 +35,10 @@ export const AuthService = {
             });
         } catch (error) {
             console.error('Login by face failed:', error);
-            throw error;
+            if (error.response && error.response.status === 404) {
+                throw new Error('User not found or not registered');
+            }
+            throw new Error('An error occurred during face login');
         }
     },
 

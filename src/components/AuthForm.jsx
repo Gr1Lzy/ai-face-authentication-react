@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import Webcam from 'react-webcam';
 
 const AuthForm = ({ onSubmit, isRegister }) => {
     const [email, setEmail] = useState('');
@@ -7,6 +8,8 @@ const AuthForm = ({ onSubmit, isRegister }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [file, setFile] = useState(null);
+    const [useCamera, setUseCamera] = useState(false);
+    const webcamRef = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,6 +24,16 @@ const AuthForm = ({ onSubmit, isRegister }) => {
         formData.append('user', new Blob([JSON.stringify(userDetails)], { type: 'application/json' }));
         formData.append('photo', file);
         onSubmit(formData);
+    };
+
+    const handleCapture = () => {
+        const imageSrc = webcamRef.current.getScreenshot();
+        fetch(imageSrc)
+            .then(res => res.blob())
+            .then(blob => {
+                const file = new File([blob], "captured_image.jpg", { type: "image/jpeg" });
+                setFile(file);
+            });
     };
 
     return (
@@ -70,8 +83,31 @@ const AuthForm = ({ onSubmit, isRegister }) => {
                         <input
                             type="file"
                             onChange={(e) => setFile(e.target.files[0])}
-                            required
                         />
+                        <button
+                            type="button"
+                            className="camera-button"
+                            onClick={() => setUseCamera(!useCamera)}
+                        >
+                            {useCamera ? "Close Camera" : "Open Camera"}
+                        </button>
+                        {useCamera && (
+                            <>
+                                <Webcam
+                                    audio={false}
+                                    ref={webcamRef}
+                                    screenshotFormat="image/jpeg"
+                                    width="100%"
+                                />
+                                <button
+                                    type="button"
+                                    className="camera-button"
+                                    onClick={handleCapture}
+                                >
+                                    Capture Photo
+                                </button>
+                            </>
+                        )}
                     </>
                 )}
                 <button type="submit">{isRegister ? 'Register' : 'Login'}</button>
