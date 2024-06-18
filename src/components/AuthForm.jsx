@@ -10,16 +10,17 @@ const AuthForm = ({ onSubmit, isRegister }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const userDetails = new FormData();
-        userDetails.append('email', email);
-        userDetails.append('password', password);
-        if (isRegister) {
-            userDetails.append('repeatPassword', repeatPassword);
-            userDetails.append('firstName', firstName);
-            userDetails.append('lastName', lastName);
-            userDetails.append('file', file);
-        }
-        onSubmit(userDetails);
+        const userDetails = {
+            email,
+            password,
+            repeatPassword,
+            firstName,
+            lastName
+        };
+        const formData = new FormData();
+        formData.append('user', new Blob([JSON.stringify(userDetails)], { type: 'application/json' }));
+        formData.append('photo', file);
+        onSubmit(formData);
     };
 
     return (

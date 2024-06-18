@@ -1,11 +1,12 @@
-import config from '../config/config';
 import axios from 'axios';
+import config from '../config/config';
+
+const AUTH_SERVICE = config.getMovieService();
 
 export const AuthService = {
-    async register(requestRegisterDto) {
-        const AUTH_SERVICE = config.getMovieService();
+    async register(formData) {
         try {
-            return await axios.post(`${AUTH_SERVICE}/auth/register`, requestRegisterDto, {
+            return await axios.post(`${AUTH_SERVICE}/auth/register`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -17,7 +18,6 @@ export const AuthService = {
     },
 
     async login(requestLoginDto) {
-        const AUTH_SERVICE = config.getMovieService();
         try {
             return await axios.post(`${AUTH_SERVICE}/auth/login`, requestLoginDto);
         } catch (error) {
@@ -27,9 +27,8 @@ export const AuthService = {
     },
 
     async loginByFace(formData) {
-        const AUTH_SERVICE = config.getMovieService();
         try {
-            return await axios.post(`${AUTH_SERVICE}/auth/loginByFace`, formData, {
+            return await axios.post(`${AUTH_SERVICE}/auth/login/photo`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -41,10 +40,9 @@ export const AuthService = {
     },
 
     async getUserDetails() {
-        const AUTH_SERVICE = config.getMovieService();
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.get(`${AUTH_SERVICE}/auth/me`, {
+            const response = await axios.get(`${AUTH_SERVICE}/auth/info`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

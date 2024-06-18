@@ -6,10 +6,11 @@ import { AuthService } from '../services/AuthService';
 const RegisterPage = () => {
     const navigate = useNavigate();
 
-    const handleRegister = async (userDetails) => {
+    const handleRegister = async (formData) => {
         try {
-            const response = await AuthService.register(userDetails);
+            const response = await AuthService.register(formData);
             console.log('Registration successful:', response.data);
+
             navigate('/login');
         } catch (error) {
             console.error('Registration failed:', error);

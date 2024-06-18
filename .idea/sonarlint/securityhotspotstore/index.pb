@@ -17,7 +17,11 @@ L
 src/services/AuthService.jsx,5\e\5e38aa6e136631fcff21df3cfc2eabc040d81afe
 ;
 src/App.jsx,c\0\c0e9e59a467e1546695bfa22746b302540797a4e
-=
-src/config.js,8\7\87f3e0e4cc62eefaef83559ad73420b22d52e801
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+D
+src/config/config.js,c\3\c3b21e8453b2cc40e463b2194433df873d54149b
+X
+(src/components/LoginWithPasswordPage.jsx,0\b\0b093d7f7c203098df179ca4c57b69d67e754484
