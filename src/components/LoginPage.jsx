@@ -12,10 +12,8 @@ const LoginPage = () => {
             const response = await AuthService.login(credentials);
             console.log('Login successful:', response.data);
 
-            // Save the token to localStorage
             localStorage.setItem('token', response.data.token);
 
-            // Redirect to the dashboard
             navigate('/dashboard');
         } catch (error) {
             console.error('Login failed:', error);
@@ -30,10 +28,8 @@ const LoginPage = () => {
             const response = await AuthService.loginByFace(formData);
             console.log('Login by face successful:', response.data);
 
-            // Save the token to localStorage
             localStorage.setItem('token', response.data.token);
 
-            // Redirect to the dashboard
             navigate('/dashboard');
         } catch (error) {
             console.error('Login by face failed:', error);

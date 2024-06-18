@@ -25,3 +25,5 @@ D
 src/config/config.js,c\3\c3b21e8453b2cc40e463b2194433df873d54149b
 X
 (src/components/LoginWithPasswordPage.jsx,0\b\0b093d7f7c203098df179ca4c57b69d67e754484
+R
+"src/components/CameraComponent.jsx,4\a\4a29560d611ac787fc48695e6e0734a90bd44354
